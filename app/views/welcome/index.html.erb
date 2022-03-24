@@ -1,9 +1,3 @@
-<h1>Viewing Party Light</h1>
+<%= render "/layouts/page/welcome" %>
 
-<%= button_to "Create a New User", "/register", method: :get%>
 
-<h2>Exisiting Users:</h2>
-<% @users.each do |user| %> 
-    <%= link_to "#{user.email}'s Dashboard", "/users/#{user.id}", method: :get %>
-    <br>
-<% end %>
