@@ -1,4 +1,4 @@
-class CreateParties < ActiveRecord::Migration[5.2]
+class CreateParty < ActiveRecord::Migration[5.2]
   def change
     create_table :parties do |t|
       t.integer :duration
@@ -6,6 +6,7 @@ class CreateParties < ActiveRecord::Migration[5.2]
       t.time :start
       t.integer :movie_id
       t.integer :user_id
+
       t.timestamps
     end
   end

@@ -1,0 +1,17 @@
+<%= form_with url: "/users/#{@user.id}/movies/#{@movie.id}/parties", method: :post, local: true do |form|%>
+<br>Duration must be greater than runtime of the movie. <%= @movie.title%> is <%= @movie.runtime%> minutes long.<br>
+<%= form.label :duration %>
+  <%= form.text_field :duration%><br>
+  <%= form.label :date %>
+  <input type='date' id='date' name='date'><br>
+  <%= form.label :start %>
+  <input type='time' id='start' name='start'><br>
+
+  <h4>invite your totally real friends</h4>
+    <ul>
+    <%@users.each do |user| %>
+      <li id="<%=user.id%>">Invite:<%= check_box_tag "users[]", user.id %> <%= label_tag(:user, "#{user.name}(#{user.email})")%></li>
+      <% end %>
+    </ul>
+    <%=form.submit "Create Party" %>
+    <%end%>

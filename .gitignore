@@ -14,7 +14,7 @@
 !/tmp/.keep
 /coverage/*
 /coverage/index.html
-
+/spec/fixtures
 # Ignore uploaded files in development
 /storage/*
 
@@ -31,3 +31,5 @@
 echo coverage >> .gitignore
 # Ignore application configuration
 /config/application.yml
+
+spec/fixtures

@@ -1,0 +1,41 @@
+<h1> "<%= @movie.title%>" related stuff here </h1>
+<h5>Description: <%= @movie.overview%> </h5>
+
+<%= button_to "Discover Movies", "/users/#{@user.id}/discover", method: :get %><br>
+
+<%= button_to "Create Viewing Party for #{@movie.title}", "/users/#{@user.id}/movies/#{@movie.id}/parties/new", method: :get %><br>
+Movie Runtime: <%= @movie.runtime%> minutes
+<% #genres %>
+<ul>
+  <%@movie.genres.each do |genre|%>
+  <li><%=genre%></li>
+  <% end %>
+</ul>
+<h4> Vote average:
+  <%if @movie.vote_avg == nil %>
+    <%= "This has not received any votes yet." %>
+    <% else %>
+    <%= @movie.vote_avg%>
+  <% end%>
+</h4>
+
+<ul><h4>
+Starring:
+  <% @movie.cast.each do |cast|%>
+
+  <li> <%=cast[0]%> as
+  <%= cast[1]%></li>
+  <% end %>
+</ul></h4>
+
+<ul><h4>
+<%if @movie.reviews == {} %>
+ <%= "No reviews yet" %>
+  <%else @movie.reviews.each do |review|%>
+
+  <li>Author: <%=review[0] %><br>
+  <%=review[1] %></li>
+  <% end %>
+<%end%>
+Review Count <%= @movie.reviews.count%>
+</ul></h4><br>

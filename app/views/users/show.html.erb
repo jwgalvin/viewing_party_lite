@@ -1,6 +1,31 @@
 <h1> <%= @user.name%>'s Magical dashboard! </h1><br>
 <%= button_to "Discover Movies", "/users/#{@user.id}/discover", method: :get %><br>
-<h6>Viewing Parties </h6>
-<ul>
 
-</ul>
+
+<div id="viewing-parties">
+    <h3>Viewing Parties </h3>
+  <% @user.user_parties.each do |view_party| %>
+    <% party = Party.find(view_party.party_id) %>
+    <%= image_tag "#{party.movie_image}" %>
+    <br>
+    <%= party.movie_title %>
+    <br>
+    <%= party.date %>
+    <br>
+    <%= party.start %>
+    <br>
+    <h4>Users Invited: </h4>
+   <% party.users.each do |user| %>
+        <% if user.id == @user.id %>
+          <b><em><%= user.name %></em></b>
+        <% else %>
+          <%= user.name %>
+        <% end %>
+        <br>
+    <% end %>
+    <%= view_party.status %>
+    <br>
+    <br>
+  <% end %>
+</div>
+
