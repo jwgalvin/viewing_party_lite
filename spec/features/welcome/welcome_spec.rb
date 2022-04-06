@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Welcome Page" do 
   before(:each) do
-    @user = User.create!(name: "Benson" ,email: "benson@example.com")
-    @user2 = User.create!(name: "Mordecai" ,email: "mc@gmail.com")
-    @user3 = User.create!(name: "Rigby" ,email: "rigzbee@aol.com")
+    @user = User.create!(name: "Benson" ,email: "benson@example.com", password: "test")
+    @user2 = User.create!(name: "Mordecai" ,email: "mc@gmail.com", password: "test")
+    @user3 = User.create!(name: "Rigby" ,email: "rigzbee@aol.com", password: "test")
 
     visit '/'
   end 
@@ -24,6 +24,12 @@ RSpec.describe "Welcome Page" do
   end 
 
   it "should have link to home page" do 
-    expect(page).to have_link("Home Page")    
+    expect(page).to have_link("Home")    
+  end 
+
+  it "has link to log in and takes you to login screen" do 
+    expect(page).to have_link("Login")
+    click_on("Login")
+    expect(current_path).to eq("/login")
   end 
 end 
