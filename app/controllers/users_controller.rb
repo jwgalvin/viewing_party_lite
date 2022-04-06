@@ -23,12 +23,31 @@ class UsersController < ApplicationController
     end
   end
 
+  def login_form 
+  end 
+
+  def login_user 
+    user = User.find_by(email: params[:email])
+    if user.present? && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      flash[:success] = "Welcome, #{user.name}!"
+      redirect_to "/users/#{user.id}"
+    else 
+      flash[:error] = "Sorry, your email or password is incorrect"
+      redirect_to login_path
+    end 
+  end 
+
 
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    def login_params 
+      params.require(:user).permit(:email, :password)
+    end 
 
     def change_status(party_id) 
      view_party = UserParty.find_by(user_id: @user.id, party_id: params[:party_id])
