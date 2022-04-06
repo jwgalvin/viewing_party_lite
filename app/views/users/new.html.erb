@@ -1,11 +1,16 @@
 <h1>  Register for an account to create totally not awkward viewing parties with complete strangers! </h1>
 
 
-<%= form_with url: '/register', method: :post, local: true do |f| %>
+<%= form_with model: @user, url: user_register_path, method: :post, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name  %>
   <%= f.label :email %>
   <%= f.text_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation, "Password Confirmation" %>
+  <%= f.password_field :password_confirmation  %>
+ 
 
   <%= f.submit %>
 <% end %>
