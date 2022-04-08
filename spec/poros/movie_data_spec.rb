@@ -4,7 +4,7 @@ RSpec.describe MovieData do
  let(:movie_data) { MovieFacade.movie_show(5244) }
  let(:movie2) { MovieFacade.movie_show(278)}
 
- it 'attributes' do
+ xit 'attributes' do
   VCR.use_cassette('attributes') do
     expect(movie_data.id).to eq(5244)
     expect(movie_data.title).to eq('Pleasurecraft')

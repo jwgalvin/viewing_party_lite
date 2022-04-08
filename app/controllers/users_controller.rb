@@ -1,4 +1,17 @@
 class UsersController < ApplicationController
+  
+
+  # def index 
+  #   if !current_user
+  #     flash[:notice] 
+  #     redirect_to root_path 
+  #   end 
+  # end 
+
+  #before_action :require_user 
+
+  # def index 
+  # end 
 
   def new
     @user = User.new
@@ -7,7 +20,8 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      redirect_to "/users/#{user.id}"
+      session[:user_id] = user.id
+      redirect_to dashboard_path
     else
       redirect_to "/register"
       flash[:alert] = "Error: #{error_message(user.errors)}"
@@ -15,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    binding.pry
     if params.include?("party_id") 
      @user = User.find(params[:id])
      change_status(params[:party_id])
@@ -31,7 +46,7 @@ class UsersController < ApplicationController
     if user.present? && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.name}!"
-      redirect_to "/users/#{user.id}"
+      redirect_to "/dashboard?#{user.id}"
     else 
       flash[:error] = "Sorry, your email or password is incorrect"
       redirect_to login_path

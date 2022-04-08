@@ -19,8 +19,8 @@ RSpec.describe 'Creating a new user:', type: :feature do
     fill_in("Password", with: "test")
     fill_in("Password Confirmation", with: "test")
     click_button("Create User")
-
-    expect(current_path).to eq("/users/#{User.last.id}")
+    
+    expect(current_path).to eq(dashboard_path)
     expect("#{User.last.name}").to eq("Bliffert's Blankship")
   end
 
@@ -59,7 +59,7 @@ RSpec.describe 'Creating a new user:', type: :feature do
      fill_in("Password Confirmation", with: "test")
      click_button("Create User")
 
-    expect(current_path).to eq("/users/#{User.last.id}")
+    expect(current_path).to eq(dashboard_path)
   end 
 
   it "displays an error if password and password confirmation are not matching" do  

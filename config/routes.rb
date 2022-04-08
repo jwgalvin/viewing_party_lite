@@ -7,12 +7,13 @@ Rails.application.routes.draw do
   post 'user_register', to: 'users#create'
   post '/login', to: 'users#login_user'
 
-  resources :users, only: [:show, :create] do
+  get '/dashboard', to: 'users#show'
+  #delete '/logout', to: 'sessions#destroy'
+
+  resources :users, only: [:create] do
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show] do
       resources :parties, only: [:new, :create]
     end
   end
-
-  get '/users/:id', to: 'users#show'
 end
